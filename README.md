@@ -92,12 +92,29 @@ N'importe quelle clé de `DEFAULTS` (voir `main.py`) peut être écrasée. Exemp
   "zones": [ ... ],
   "panel": { "chain_length": 3, "pixel_mapper_config": "Rotate:180" },
   "font": { "time": "fonts/6x13.bdf" },
-  "y_time": 20
+  "y_time": 20,
+  "weather": { "enabled": false }
 }
 ```
 
 Les clés d'un sous-dict (comme `panel`) sont fusionnées : tu n'as à préciser
 que celles que tu changes, les autres gardent leur valeur par défaut.
+
+### Météo (`weather`)
+
+Zone à droite de l'écran affichant la météo d'une ville configurable
+(Paris par défaut). Données via [Open-Meteo](https://open-meteo.com)
+(gratuit, sans clé). Rafraîchi toutes les heures par défaut, dans un thread
+qui ne bloque jamais l'affichage.
+
+| Clé | Rôle |
+|-----|------|
+| `enabled` | `true` par défaut. Mets `false` pour libérer la place à l'écran. |
+| `label` | Nom affiché en haut (garde-le court). |
+| `latitude`, `longitude` | Coordonnées de la ville. |
+| `color` | Couleur `[R, G, B]`. |
+| `width_px` | Largeur réservée à droite (48 par défaut). Les villes se recasent dans la largeur restante. |
+| `refresh_seconds` | Intervalle entre deux appels API (3600 par défaut). |
 
 ### Clés utiles du bloc `panel`
 
