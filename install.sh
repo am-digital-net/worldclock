@@ -24,8 +24,8 @@ if "$PY" -c "import rgbmatrix" 2>/dev/null; then
 else
   BUILD_DIR="$HOME/rpi-rgb-led-matrix"
   [ -d "$BUILD_DIR/.git" ] || git clone --depth 1 https://github.com/hzeller/rpi-rgb-led-matrix.git "$BUILD_DIR"
-  make -C "$BUILD_DIR" build-python PYTHON="$PY"
-  sudo make -C "$BUILD_DIR" install-python PYTHON="$PY"
+  make -C "$BUILD_DIR/bindings/python" build-python PYTHON="$PY"
+  sudo make -C "$BUILD_DIR/bindings/python" install-python PYTHON="$PY"
 fi
 
 echo ">>> [3/5] Desactivation du son integre (conflit connu)..."
