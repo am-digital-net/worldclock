@@ -28,7 +28,7 @@ DEFAULTS = {
         "parallel": 1,
         "gpio_slowdown": 2,
         "hardware_mapping": "regular",
-        "pixel_mapper_config": "",
+        "pixel_mapper_config": "Rotate:180",
         "disable_hardware_pulsing": False,
         "brightness": 70,
     },

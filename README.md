@@ -108,7 +108,7 @@ que celles que tu changes, les autres gardent leur valeur par défaut.
 | `rows`, `cols` | Résolution d'UN panneau (64×32 → `cols`=64, `rows`=32). |
 | `hardware_mapping` | `regular` ou `adafruit-hat` selon ta carte. |
 | `gpio_slowdown` | 1 à 4. Augmente si l'image scintille (Pi 4/5 : 2–4). |
-| `pixel_mapper_config` | `"Rotate:180"` si l'écran est monté à l'envers, sinon `""`. |
+| `pixel_mapper_config` | `"Rotate:180"` par défaut (écran monté à l'envers). Mettre `""` si le tien est à l'endroit. |
 | `disable_hardware_pulsing` | `true` si tu lançais la démo avec `--led-no-hardware-pulse`. |
 | `brightness` | Luminosité 0–100. |
 
