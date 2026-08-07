@@ -1,19 +1,7 @@
 {
-  "panel": {
-    "rows": 32,
-    "cols": 64,
-    "chain_length": 2,
-    "parallel": 1,
-    "gpio_slowdown": 2,
-    "hardware_mapping": "regular",
-    "disable_hardware_pulsing": false,
-    "brightness": 70
-  },
-  "font": "fonts/6x10.bdf",
-  "refresh_seconds": 0.5,
   "zones": [
+    { "label": "MIAMI",    "tz": "America/New_York", "color": [0, 160, 255] },
     { "label": "PARIS",    "tz": "Europe/Paris",     "color": [255, 90, 0] },
-    { "label": "NEW YORK", "tz": "America/New_York", "color": [0, 160, 255] },
-    { "label": "TOKYO",    "tz": "Asia/Tokyo",       "color": [0, 220, 120] }
+    { "label": "SHENZHEN", "tz": "Asia/Shanghai",    "color": [0, 220, 120] }
   ]
 }
