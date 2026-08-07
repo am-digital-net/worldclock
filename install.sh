@@ -14,20 +14,23 @@ PY="$(command -v python3)"
 
 echo ">>> Projet : $PROJECT_DIR"
 
-echo ">>> [1/5] Dependances systeme..."
+echo ">>> [1/5] Dependances systeme (recette upstream rgbmatrix)..."
+# python3-pil (apt) est CRUCIAL : le paquet Debian place le header Imaging.h
+# dans /usr/include/python3.X/, ou le shim C de rgbmatrix va le chercher.
+# Une install de Pillow via pip ne suffit pas : la wheel place les headers
+# dans site-packages/PIL/, endroit que CMake ne cherche pas.
 sudo apt-get update -qq
-sudo apt-get install -y git python3-dev python3-pip cython3 build-essential >/dev/null
+sudo apt-get install -y \
+  git \
+  python-dev-is-python3 \
+  python3-pil \
+  python3-pip \
+  cython3 >/dev/null
 
-echo ">>> [2/5] Packages Python (requirements.txt)..."
+echo ">>> [2/5] Package Python rgbmatrix..."
 # --break-system-packages requis sur Raspberry Pi OS Bookworm+ (PEP 668).
-#
-# rgbmatrix compile un shim C qui inclut le header "Imaging.h" de Pillow :
-# Pillow DOIT etre installee avant le build. Comme pip isole le build par
-# defaut (venv temporaire vide), on pre-installe Pillow + les outils de build
-# et on desactive l'isolation avec --no-build-isolation.
-PIP_OPTS="--break-system-packages"
-sudo "$PY" -m pip install $PIP_OPTS Pillow scikit-build-core cython cmake ninja
-sudo "$PY" -m pip install $PIP_OPTS --no-build-isolation -r "$PROJECT_DIR/requirements.txt"
+# scikit-build-core, cmake, ninja sont apportes par l'isolation de build pip.
+sudo "$PY" -m pip install --break-system-packages -r "$PROJECT_DIR/requirements.txt"
 
 echo ">>> [3/5] Desactivation du son integre (conflit connu)..."
 echo "blacklist snd_bcm2835" | sudo tee /etc/modprobe.d/blacklist-rgb-matrix.conf >/dev/null
