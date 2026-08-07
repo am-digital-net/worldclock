@@ -12,6 +12,7 @@ worldclock/
 ├── main.py                Le programme (n'a pas besoin d'être modifié)
 ├── config.example.json    Modèle de configuration à copier en config.json
 ├── config.json            TA configuration (ignorée par git)
+├── requirements.txt       Dépendances Python (installées par install.sh)
 ├── install.sh             Installation / mise à jour en une commande (idempotent)
 ├── fonts/                 Polices d'affichage (.bdf)
 └── README.md              Ce fichier
@@ -39,12 +40,15 @@ bash install.sh
 
 Le script :
 
-1. installe les dépendances,
-2. compile et installe la bibliothèque LED **une seule fois** (il saute cette
-   étape si elle est déjà là),
+1. installe les dépendances système (apt),
+2. installe les packages Python listés dans `requirements.txt` (dont la
+   bibliothèque LED `rgbmatrix`, compilée depuis les sources git),
 3. désactive le module son du Pi (connu pour perturber les LED),
 4. crée un **service** qui lance l'horloge,
 5. démarre l'horloge et l'active **au démarrage du Pi**.
+
+Pour ajouter une dépendance Python plus tard, ajoute-la dans `requirements.txt`
+puis relance `./install.sh`.
 
 Le script est **idempotent** : tu peux le relancer autant de fois que tu veux
 (après une mise à jour de `config.json` ou du code) sans effet indésirable.

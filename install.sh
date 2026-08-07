@@ -16,17 +16,12 @@ echo ">>> Projet : $PROJECT_DIR"
 
 echo ">>> [1/5] Dependances systeme..."
 sudo apt-get update -qq
-sudo apt-get install -y git python3-dev cython3 >/dev/null
+sudo apt-get install -y git python3-dev python3-pip cython3 build-essential >/dev/null
 
-echo ">>> [2/5] Bibliotheque LED (rgbmatrix)..."
-if "$PY" -c "import rgbmatrix" 2>/dev/null; then
-  echo "    Deja installee, on saute la compilation."
-else
-  BUILD_DIR="$HOME/rpi-rgb-led-matrix"
-  [ -d "$BUILD_DIR/.git" ] || git clone --depth 1 https://github.com/hzeller/rpi-rgb-led-matrix.git "$BUILD_DIR"
-  make -C "$BUILD_DIR/bindings/python" build-python PYTHON="$PY"
-  sudo make -C "$BUILD_DIR/bindings/python" install-python PYTHON="$PY"
-fi
+echo ">>> [2/5] Packages Python (requirements.txt)..."
+# --break-system-packages requis sur Raspberry Pi OS Bookworm+ (PEP 668).
+# rgbmatrix compile sa lib C native pendant l'installation via pyproject.toml.
+sudo "$PY" -m pip install --break-system-packages -r "$PROJECT_DIR/requirements.txt"
 
 echo ">>> [3/5] Desactivation du son integre (conflit connu)..."
 echo "blacklist snd_bcm2835" | sudo tee /etc/modprobe.d/blacklist-rgb-matrix.conf >/dev/null
