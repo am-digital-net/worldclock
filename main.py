@@ -31,6 +31,10 @@ def build_matrix(panel):
     o.brightness = panel.get("brightness", 70)
     if panel.get("disable_hardware_pulsing", False):
         o.disable_hardware_pulsing = True
+    # Par defaut rgbmatrix passe de root a `daemon` apres avoir pris les GPIO.
+    # Si le projet est dans /home/<user>/ (permissions 700), `daemon` ne peut
+    # plus lire ni les polices ni config.json => on desactive le drop.
+    o.drop_privileges = False
     return RGBMatrix(options=o)
 
 
