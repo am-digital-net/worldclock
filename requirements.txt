@@ -1,3 +1,7 @@
+# Bibliotheque d'images (aussi requise a la compilation de rgbmatrix,
+# qui embarque un shim C incluant Imaging.h).
+Pillow
+
 # Bibliotheque LED HUB75 (pas sur PyPI, install depuis git).
 # Pour pinner une version stable : ajouter @<commit-sha> a la fin.
 rgbmatrix @ git+https://github.com/hzeller/rpi-rgb-led-matrix.git
