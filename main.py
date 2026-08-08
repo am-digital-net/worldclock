@@ -34,11 +34,11 @@ DEFAULTS = {
     "panel": {
         "rows": 32,
         "cols": 64,
-        "chain_length": 2,
+        "chain_length": 3,
         "parallel": 1,
         "gpio_slowdown": 2,
         "hardware_mapping": "regular",
-        "pixel_mapper_config": "Rotate:180",
+        "pixel_mapper_config": "",
         "disable_hardware_pulsing": False,
         "brightness": 70,
     },
